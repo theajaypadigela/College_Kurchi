@@ -1,10 +1,9 @@
 import React from "react";
 
 function Button(props) {
-  // Enhanced selected style with more visual distinction
   const buttonStyle = props.isSelected ? 
     { 
-      backgroundColor: '#2ecc71', // Bright green for better visibility
+      backgroundColor: '#2ecc71', 
       border: '3px solid #fff',
       boxShadow: '0 0 12px rgba(46, 204, 113, 0.7)',
       transform: 'scale(1.05)',

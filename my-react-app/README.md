@@ -1,47 +1,47 @@
-# My React App
+# College Kurchi React App
 
-This is a simple React application built with TypeScript.
+A React-based web application for College Kurchi.
 
-## Getting Started
+## Description
 
-To get started with this project, follow the steps below:
+This project is a React application that includes components like StickyHeadTable for displaying tabular data.
 
-1. **Clone the repository**:
-   ```
-   git clone <repository-url>
-   ```
+## Installation
 
-2. **Navigate into the project directory**:
-   ```
-   cd my-react-app
-   ```
+To install the project dependencies, run:
 
-3. **Install dependencies**:
-   ```
-   npm install
-   ```
+```bash
+npm install
+```
 
-4. **Run the application**:
-   ```
-   npm start
-   ```
+## Running the Application
 
-   This will start the development server and open the application in your default web browser.
+To start the development server:
+
+```bash
+npm start
+```
+
+The application will be available at [http://localhost:3000](http://localhost:3000).
+
+## Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+## Technologies Used
+
+- React
+- TypeScript
+- Material UI (suggested by the StickyHeadTable component)
 
 ## Project Structure
 
-- `public/index.html`: The main HTML file that serves as the entry point for the React application.
-- `src/App.tsx`: The main component of the application.
-- `src/index.tsx`: The entry point for the React application.
-- `src/components/SampleComponent.tsx`: A sample React component.
-- `src/types/index.ts`: TypeScript interfaces and types for type safety.
-- `tsconfig.json`: TypeScript configuration file.
-- `package.json`: npm configuration file.
-
-## Usage
-
-You can modify the components in the `src/components` directory to customize the application. The `App.tsx` file is where you can define the main layout and structure of your app.
+The project follows a standard React application structure with TypeScript support.
 
 ## License
 
-This project is licensed under the MIT License.
+[MIT](https://choosealicense.com/licenses/mit/)

@@ -22,7 +22,7 @@ function App() {
   const [gender, setGender] = useState('');
   const [phase, setPhase] = useState('first');
   const [phaseSelected, setPhaseSelected] = useState(false);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   const [branch, setBranch] = useState<string[]>([]);
   const [phaseData, setPhaseData] = useState<CollegeData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -103,7 +103,6 @@ function App() {
     if (!validateForm()) {
       return;
     }
-    setIsFlipped(true);
     const rankNum = parseInt(rank);
     if (!isNaN(rankNum) && Array.isArray(phaseData)) {
       const selectedGender = gender === 'Male' ? 'Boys' : 'Girls';
@@ -159,13 +158,15 @@ function App() {
       } else {
         setRows([createData(1, "No colleges found matching your criteria", "", 0)]);
       }
+      setShowResults(true);
     } else {
       setRows([createData(1, "Please enter a valid rank and select phase", "", 0)]);
+      setShowResults(true);
     }
   }
 
-  function handleFlipBack() {
-    setIsFlipped(false);
+  function handleBack() {
+    setShowResults(false);
   }
 
   function addBranch(group: string): void {
@@ -185,42 +186,41 @@ function App() {
       </nav>
       
       <div className="content-container">
-        <div className={`card ${isFlipped ? 'flipped' : ''}`}>
-          { !isFlipped ? (
-            <div className="front">
-              <div style={{ display: 'flex', alignItems: 'center', width: '80%', marginBottom: '15px' }}>
-                <label htmlFor="rankInput" style={{ marginRight: '10px', fontWeight: 'bold', minWidth: '50px' }}>Rank:</label>
-                <Input Rank={rank} onChange={handleRankChange}/>
-              </div>
-              <div>
-                <Category category={category} onChange={handleCategoryChange}/>
-                <Gender onChange={handleGenderChange} value={gender} />
-              </div>
-              <div style={{ width: '100%', alignSelf: 'stretch', padding: '0', marginTop: 10 }}>
-                <SelectPhase onChange={handlePhaseChange} value={phase} />
-              </div>
-              {/* <div style={{margin: 15 }}></div> */}
-              <div style={{display:'flex', justifyContent:'center', alignItems:'center', backgroundColor: 'lightgreen', padding:'10px', margin:'15px'}}>
-                <label htmlFor=""> select your Preferd branch </label>
-              </div>
-              <Branchs onChange={addBranch} selectedBranches={branch} />
-              {errorMessage && (
-                <div style={{ color: 'red', backgroundColor: '#ffeeee', padding: '10px', borderRadius: '5px', margin: '10px 0', textAlign: 'center' }}>
-                  {errorMessage}
-                </div>
-              )}
-              <button onClick={handleSubmit}>submit</button>
+        {!showResults ? (
+          <div className="card form-card">
+            <div className="rank-input-container">
+              <label htmlFor="rankInput" style={{ marginRight: '10px', fontWeight: 'bold', minWidth: '50px' }}>Rank:</label>
+              <Input Rank={rank} onChange={handleRankChange}/>
             </div>
-          ) : (
-            <div className="back">
-              <div style={{textAlign: 'center'}}>
-                <h2>Available Colleges Based on Your Rank</h2>
+            <div>
+              <Category category={category} onChange={handleCategoryChange}/>
+              <Gender onChange={handleGenderChange} value={gender} />
+            </div>
+            <div style={{ width: '100%', alignSelf: 'stretch', padding: '0', marginTop: 10 }}>
+              <SelectPhase onChange={handlePhaseChange} value={phase} />
+            </div>
+            <div style={{display:'flex', justifyContent:'center', alignItems:'center', backgroundColor: 'lightgreen', padding:'10px', margin:'15px'}}>
+              <label htmlFor=""> select your Preferd branch </label>
+            </div>
+            <Branchs onChange={addBranch} selectedBranches={branch} />
+            {errorMessage && (
+              <div style={{ color: 'red', backgroundColor: '#ffeeee', padding: '10px', borderRadius: '5px', margin: '10px 0', textAlign: 'center' }}>
+                {errorMessage}
+              </div>
+            )}
+            <button onClick={handleSubmit}>submit</button>
+          </div>
+        ) : (
+          <div className="card results-card">
+            <div style={{textAlign: 'center', width: '100%'}}>
+              <h2>Available Colleges Based on Your Rank</h2>
+              <div className="table-container">
                 <StickyHeadTable rows={rows} />
-                <button onClick={handleFlipBack}>Flip Back</button>
               </div>
+              <button onClick={handleBack}>Go Back</button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         <div className="bottom-heading" style={{ margin: "20px" }}></div>
       </div>
     </div>
