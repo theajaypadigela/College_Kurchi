@@ -65,7 +65,7 @@ const Landing: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full text-sm font-medium mb-6">
               <span className="material-symbols-outlined text-base">verified</span>
-              Trusted by 50,000+ students
+              Trusted by 1500+ students
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold text-on-surface leading-tight mb-6">
               Master TS EAMCET
