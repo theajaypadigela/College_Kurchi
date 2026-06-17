@@ -61,10 +61,15 @@ RAG-grounded recommendations.
       "ranks": { "OC|Boys": 2053, "OC|Girls": 2089, "BC_B|Boys": 4120, ... } }
   ],
   "document": "CBIT … Ranga Reddy … CSE OC 2053 … fee 183000 … avg 9.9 LPA …",
-  "embedding": [0.0123, -0.0456, ...] // float vector for semantic search
+  "chunks": [                          // overlapping windows of `document`, each embedded
+    { "text": "CBIT (code CBIT). Located in …", "index": 0, "embedding": [ ... ] },
+    { "text": "… CSE OC boys 2053 … fee 183000 …", "index": 1, "embedding": [ ... ] }
+  ],
+  "embedding": [0.0123, -0.0456, ...] // per-college mean vector (fallback / compat)
 }
 ```
 Indexes: `code` (unique via `_id`), `district`, `type`, `university`, `branches.code`.
+`document`, `chunks`, and `embedding` are projected out of all public API responses.
 
 ### `meta` (single document, `_id: "meta"`)
 Derived at seed time — drives the frontend filter dropdowns:
@@ -77,6 +82,9 @@ Rank key format is `"{CATEGORY}|{Gender}"`, e.g. `"OC|Boys"`, `"SC_1|Girls"`.
 ## 3. RAG workflow (AI Counselor)
 
 ```
+(seed time)  document per college ──► chunk into overlapping windows ──► embed each chunk
+             (chunking strategy: CHUNK_MAX_WORDS / CHUNK_OVERLAP_WORDS, sentence-aware)
+
 user message
    │
    ▼
@@ -85,7 +93,8 @@ query_parser ──► { intent, rank?, branch?, category?, gender?, location?, 
    ▼
 retriever ──┬─ structured retrieval: Mongo filter (branch offered, rank vs closing,
             │   district, fee) → ranked candidate colleges
-            └─ semantic retrieval: embed(query) → cosine over college embeddings → top-K
+            └─ semantic retrieval: embed(query) → cosine over CHUNK vectors → aggregate
+            │   best-chunk score per college → top-K colleges
    │  (merge + dedupe + cap)
    ▼
 context builder ──► compact, factual bullet list of the retrieved colleges
@@ -104,7 +113,8 @@ context is built from authoritative DB fields, and `sources` lets the UI show wh
 
 | Method | Path | Purpose |
 |---|---|---|
-| GET  | `/health` | liveness + db/llm/index status |
+| GET  | `/health` | detailed status (db/llm/index/env) |
+| GET  | `/readiness` | readiness probe — 200 ready / 503 not ready (K8s / load balancer) |
 | GET  | `/meta` | filter options (categories, genders, branches, districts, universities, types, year) |
 | GET  | `/colleges` | list; query: `q, branch, district, type, university, minFee, maxFee, minAvgPackage, codes, sort, limit` |
 | GET  | `/colleges/{code}` | single college detail |
@@ -129,16 +139,22 @@ college kurchi/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py           # FastAPI app, CORS, lifespan (build vector index)
-│   │   ├── config.py         # pydantic-settings (env)
-│   │   ├── db.py             # Mongo client
+│   │   ├── config.py         # pydantic-settings (env) + prod safety guard
+│   │   ├── logging_config.py # central logging setup
+│   │   ├── db.py             # Mongo client, pool config, indexes
 │   │   ├── models.py         # Pydantic request/response schemas
-│   │   ├── seed.py           # ingest data/*.json → Mongo (+embeddings)  [python -m app.seed]
-│   │   ├── rag/              # embeddings, vector_store, query_parser, retriever, llm, counselor
+│   │   ├── seed.py           # ingest data/*.json → chunk + embed → Mongo  [python -m app.seed]
+│   │   ├── rag/              # chunking, embeddings, vector_store, query_parser, retriever, llm, counselor, index
 │   │   ├── services/         # colleges, recommendations, predictor, comparison
-│   │   └── routers/          # meta, colleges, recommendations, predictor, comparison, counselor
-│   ├── requirements.txt
+│   │   └── routers/          # meta, colleges, recommendations, predictor, comparison, counselor, auth
+│   ├── tests/                # pytest suite (unit + API, mongomock)
+│   ├── Dockerfile
+│   ├── requirements.txt / requirements-dev.txt
+│   ├── DATA_PREP.md          # data ingestion pipeline
 │   ├── .env.example
 │   └── README.md
+├── docker-compose.yml        # mongo + seed + api
+├── .github/workflows/ci.yml  # lint + tests on push/PR
 ├── data/                     # source JSON + PDFs (delete after seeding)
 └── scripts/                  # convert_*.py (PDF → source JSON)
 ```
@@ -147,7 +163,11 @@ college kurchi/
 
 - Frontend: React 19, TypeScript, Vite, Tailwind, React Router. `VITE_API_BASE_URL` (default `http://localhost:8000`).
 - Backend: FastAPI, Uvicorn, Pydantic v2, PyMongo, Groq SDK, NumPy.
+- Chunking: sentence-aware overlapping windows (`CHUNK_MAX_WORDS` / `CHUNK_OVERLAP_WORDS`), embedded per chunk.
 - Embeddings: hashing (pure NumPy, default, free) or `sentence-transformers` (`EMBEDDING_BACKEND=st`).
-- LLM: Groq `llama-3.3-70b-versatile` (`GROQ_MODEL`); graceful template fallback if `GROQ_API_KEY` is unset.
-- MongoDB: `MONGODB_URI` (default local). Vector search is in-app cosine (Atlas `$vectorSearch` optional).
+- LLM: Groq `llama-3.3-70b-versatile` (`GROQ_MODEL`); request timeout + retry; graceful template fallback if `GROQ_API_KEY` is unset.
+- Auth: JWT (HS256); `JWT_SECRET` from env, refused-if-default in `ENVIRONMENT=production`.
+- Observability: stdlib `logging` (levels/timestamps); `/health` + `/readiness` probes.
+- MongoDB: `MONGODB_URI` (default local), pool sizing via `MONGO_MAX_POOL_SIZE`. Vector search is in-app cosine (Atlas `$vectorSearch` optional).
+- Tests/CI: `pytest` (mongomock, hermetic) run by GitHub Actions with `ruff` lint.
 ```
