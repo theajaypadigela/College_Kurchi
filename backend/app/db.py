@@ -6,8 +6,12 @@ from typing import Optional
 
 from pymongo import ASCENDING, MongoClient
 from pymongo.database import Database
+from pymongo.errors import PyMongoError
 
 from .config import settings
+from .logging_config import get_logger
+
+logger = get_logger("db")
 
 _client: Optional[MongoClient] = None
 
@@ -20,7 +24,12 @@ USERS = "users"
 def get_client() -> MongoClient:
     global _client
     if _client is None:
-        _client = MongoClient(settings.mongodb_uri, serverSelectionTimeoutMS=5000)
+        _client = MongoClient(
+            settings.mongodb_uri,
+            serverSelectionTimeoutMS=settings.mongo_timeout_ms,
+            maxPoolSize=settings.mongo_max_pool_size,
+            appname="college-kurchi-api",
+        )
     return _client
 
 
@@ -28,12 +37,21 @@ def get_db() -> Database:
     return get_client()[settings.db_name]
 
 
+def close_client() -> None:
+    """Drain the connection pool on shutdown."""
+    global _client
+    if _client is not None:
+        _client.close()
+        _client = None
+
+
 def ping() -> bool:
     """Return True if MongoDB is reachable."""
     try:
         get_client().admin.command("ping")
         return True
-    except Exception:
+    except PyMongoError as exc:
+        logger.warning("MongoDB ping failed: %s", exc)
         return False
 
 
