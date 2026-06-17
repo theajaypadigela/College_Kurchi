@@ -5,7 +5,7 @@ from typing import List, Optional
 
 from ..db import COLLEGES, get_db
 
-PUBLIC_PROJECTION = {"embedding": 0, "document": 0, "_id": 0}
+PUBLIC_PROJECTION = {"embedding": 0, "document": 0, "chunks": 0, "_id": 0}
 
 
 def list_colleges(
