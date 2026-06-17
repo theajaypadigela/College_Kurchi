@@ -43,7 +43,7 @@ CATEGORY_PATTERNS = [
     (re.compile(r"\boc\b|open category|general category"), "OC"),
 ]
 
-RANK_RE = re.compile(r"\b(\d{1,3}(?:,\d{3})+|\d{3,6})\s*(k|thousand)?\b", re.IGNORECASE)
+RANK_RE = re.compile(r"\b(\d{1,3}(?:,\d{3})+|\d{1,6})\s*(k|thousand)?\b", re.IGNORECASE)
 FEE_RE = re.compile(r"(?:under|below|less than|max|budget|upto|up to)\s*(?:rs\.?|₹)?\s*(\d{1,3}(?:,\d{3})+|\d+)\s*(k|l|lakh|lakhs|lpa)?", re.IGNORECASE)
 
 
@@ -68,12 +68,21 @@ class ParsedQuery:
 def _parse_rank(q: str) -> Optional[int]:
     for m in RANK_RE.finditer(q):
         raw, suffix = m.group(1), m.group(2)
+        digits = raw.replace(",", "")
         has_comma = "," in raw
-        if not has_comma and not suffix and "rank" not in q:
-            continue  # a bare number that isn't clearly a rank (e.g. a year)
-        n = int(raw.replace(",", ""))
-        if suffix and suffix.lower() in ("k", "thousand"):
-            n *= 1000
+        suffix = (suffix or "").lower()
+        if suffix in ("k", "thousand"):
+            # An explicit k/thousand suffix makes even a short number a rank
+            # (e.g. "25k" → 25,000, "5k" → 5,000).
+            n = int(digits) * 1000
+        else:
+            # Bare number: ignore short/ambiguous values and non-rank contexts
+            # (e.g. a year like "2024") unless it's clearly written as a rank.
+            if len(digits) < 3:
+                continue
+            if not has_comma and "rank" not in q:
+                continue
+            n = int(digits)
         if 0 < n <= 500000:
             return n
     return None
