@@ -59,12 +59,14 @@ def retrieve(parsed: ParsedQuery, query_text: str, index: RagIndex, limit: int =
             for c, _ in sorted(rows, key=lambda x: x[1])[:8]:
                 add(c)
 
-    # 3) Semantic retrieval (fills gaps / handles fuzzy questions)
+    # 3) Semantic retrieval (fills gaps / handles fuzzy questions).
+    #    Searches the chunk-level vector store and aggregates chunk hits back to
+    #    their parent colleges (best-chunk score per college).
     if index.embedder is not None and index.vector_store.size and len(picked) < limit:
         qv = index.embedder.embed(query_text)
-        for code, score in index.vector_store.search(qv, k=8):
-            if score <= 0:
-                continue
+        for code, _score in index.semantic_colleges(qv, k=20):
             add(index.by_code.get(code))
+            if len(picked) >= limit:
+                break
 
     return picked[:limit]
