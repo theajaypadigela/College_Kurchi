@@ -10,14 +10,15 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel, EmailStr, Field
 
+from ..config import settings
 from ..db import get_db
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-# ── JWT config ────────────────────────────────────────────────────────────────
-SECRET_KEY = "college-kurchi-jwt-secret-change-in-prod"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
+# ── JWT config (from settings; secret is env-driven and guarded in prod) ───────
+SECRET_KEY = settings.jwt_secret
+ALGORITHM = settings.jwt_algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.jwt_expire_minutes
 
 pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/token")
