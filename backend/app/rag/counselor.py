@@ -5,10 +5,13 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional
 
+from ..logging_config import get_logger
 from .index import RagIndex, get_index
 from .llm import LLMClient, get_llm
 from .query_parser import ParsedQuery, parse
 from .retriever import find_branch, rank_of, retrieve
+
+logger = get_logger("rag.counselor")
 
 SYSTEM_PROMPT = (
     "You are College Kurchi, a friendly, precise counseling assistant for TS EAMCET "
@@ -194,16 +197,16 @@ def chat(
     if not parsed.genderSpecified and user_gender:
         parsed.gender = user_gender
 
-    print(
-        f"[counselor] parsed: rank={parsed.rank}, branch={parsed.branch}, "
-        f"cat={parsed.category}, gender={parsed.gender}, intent={parsed.intent}"
+    logger.info(
+        "parsed: rank=%s branch=%s cat=%s gender=%s intent=%s",
+        parsed.rank, parsed.branch, parsed.category, parsed.gender, parsed.intent,
     )
 
     colleges = retrieve(parsed, message, index, limit=8)
     context = build_context(colleges, parsed, index)
     sources = [{"code": c["code"], "name": c["name"]} for c in colleges]
 
-    print(f"[counselor] retrieved {len(colleges)} colleges")
+    logger.info("retrieved %d colleges", len(colleges))
 
     # ── Build a student-profile preamble for the LLM ──────────────────
     profile_parts: List[str] = []
@@ -240,7 +243,7 @@ def chat(
             if not answer:
                 answer = _template_answer(parsed, colleges, index)
         except Exception as exc:  # noqa: BLE001 — any LLM/network failure → fallback
-            print(f"[counselor] LLM error, using fallback: {exc}")
+            logger.warning("LLM error, using template fallback: %s", exc)
             answer = _template_answer(parsed, colleges, index)
     else:
         answer = _template_answer(parsed, colleges, index)
