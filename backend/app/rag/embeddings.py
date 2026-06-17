@@ -15,6 +15,10 @@ from typing import List, Sequence
 
 import numpy as np
 
+from ..logging_config import get_logger
+
+logger = get_logger("rag.embeddings")
+
 _TOKEN_RE = re.compile(r"[a-z0-9]+")
 _STOP = {"the", "and", "for", "with", "college", "engineering", "institute",
          "technology", "science", "sciences", "of", "in", "a", "an"}
@@ -94,6 +98,6 @@ def get_embedder(backend: str = "hashing", dim: int = 512,
         try:
             return SentenceTransformerEmbedder(st_model)
         except Exception as exc:  # ImportError or model download failure
-            print(f"[embeddings] sentence-transformers unavailable ({exc}); using hashing.")
+            logger.warning("sentence-transformers unavailable (%s); falling back to hashing.", exc)
             return HashingEmbedder(dim=dim)
     return HashingEmbedder(dim=dim)
