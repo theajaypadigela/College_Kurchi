@@ -1,0 +1,25 @@
+# Core API
+fastapi>=0.115,<0.116
+uvicorn[standard]>=0.30
+pydantic>=2.5,<3
+pydantic-settings>=2.2
+python-dotenv>=1.0
+
+# Auth
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+email-validator>=2.0
+python-multipart>=0.0.9
+
+# Database
+pymongo>=4.6
+
+# LLM (Groq — OpenAI-compatible Llama inference)
+groq>=0.11
+
+# Embeddings / vector math
+numpy>=1.26
+
+# Optional: real semantic embeddings (set EMBEDDING_BACKEND=st to use).
+# Heavier install (~torch). The app works without it via the hashing embedder.
+# sentence-transformers>=2.7

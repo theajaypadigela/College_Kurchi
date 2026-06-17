@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>College Kurchi - TS EAMCET Counseling</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#00201d",
+                        "on-background": "#191c1e",
+                        "on-surface-variant": "#444651",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#6e2c00",
+                        "background": "#f7f9fb",
+                        "secondary": "#006a61",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-tertiary-container": "#f39461",
+                        "outline": "#757682",
+                        "surface-tint": "#4059aa",
+                        "on-tertiary-fixed": "#341100",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-secondary-container": "#006f66",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed": "#89f5e7",
+                        "secondary-container": "#86f2e4",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#1e3a8a",
+                        "primary": "#00236f",
+                        "tertiary": "#4b1c00",
+                        "outline-variant": "#c5c5d3",
+                        "on-primary-fixed-variant": "#264191",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#00164e",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b6c4ff",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "2xl": "48px",
+                        "base": "8px",
+                        "3xl": "64px",
+                        "md": "16px",
+                        "container-max": "1200px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-xl-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-xl": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "caption": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopNavBar -->
+<header class="bg-surface docked full-width top-0 sticky z-50 shadow-sm border-b-0">
+<div class="flex justify-between items-center w-full px-6 md:px-lg max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-md">
+<span class="text-headline-md font-headline-md font-bold text-primary">College Kurchi</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex gap-sm">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-3 py-2 rounded-md" href="#">Explorer</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-3 py-2 rounded-md" href="#">Predictor</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:bg-surface-container-low transition-colors duration-200 px-3 py-2 rounded-md" href="#">Shortlist</a>
+</nav>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center text-on-surface-variant gap-sm mr-sm">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                    Consult AI
+                </button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-6 md:px-lg py-3xl md:py-24 grid grid-cols-1 md:grid-cols-12 gap-xl items-center">
+<div class="md:col-span-6 flex flex-col gap-lg">
+<div class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full w-max text-caption font-caption font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                    Trusted by 50,000+ students
+                </div>
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-primary leading-tight">
+                    Master TS EAMCET Counseling with AI
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    Navigate the complex admissions landscape with a steady guide. Our AI-driven platform reduces stress and brings clarity to your college decisions.
+                </p>
+<div class="flex flex-wrap gap-4 mt-sm">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm">
+                        Start Predicting
+                    </button>
+<button class="border border-secondary text-secondary font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-secondary hover:text-on-secondary transition-colors">
+                        Explore Colleges
+                    </button>
+</div>
+</div>
+<div class="md:col-span-6 h-full min-h-[400px] rounded-2xl overflow-hidden shadow-sm relative group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A pristine, modern, 3D rendered composition representing academic success and AI guidance. The scene features floating, translucent geometric glass panels and sleek white platforms against a soft, light-gray background. Subtle glowing accents in deep authoritative blue and soft empathetic teal highlight the pathways between the elements, symbolizing data-driven decision making. The lighting is bright, diffused, and highly professional, evoking a sense of clarity, trust, and minimal stress for a high-end educational counseling platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAibc3fMvVAiomHsxTZO7QNSySKg-qg9rwpm2z3UJyl22BOQTIUbCHIafl16nUbjJSu9oPgMUBvIl1at6d2PXTHFGvBHpz_3zLmoF5i-UREKXOq8mPVOiBEdtGUujCS5IKopNa81ZC7hhL2ndyh-kEB9QDcHkjs0PDBBr3-ilA1BKygIGOCM_D731iORDHi3o1Ee1YPgq1_xlqQXKMU07GUjnb-FesZryyZn4dCaLndkgtTe6ffyzEqJKPrW_wrzSkyqyyUmWjLEEXu">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-tint/20 to-transparent"></div>
+</div>
+</section>
+<!-- Stats Overview (Bento Grid) -->
+<section class="bg-surface-container-lowest py-3xl border-y border-outline-variant/30">
+<div class="max-w-container-max mx-auto px-6 md:px-lg">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-surface rounded-2xl p-lg flex flex-col gap-sm shadow-sm border border-outline-variant/20 items-start justify-center h-40">
+<span class="material-symbols-outlined text-secondary text-[32px]">domain</span>
+<h3 class="font-headline-lg text-headline-lg text-primary">300+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Engineering Colleges Mapped</p>
+</div>
+<div class="bg-primary rounded-2xl p-lg flex flex-col gap-sm shadow-sm border border-outline-variant/20 items-start justify-center h-40 text-on-primary relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-primary-container rounded-full opacity-50 blur-2xl"></div>
+<span class="material-symbols-outlined text-[32px] relative z-10">history</span>
+<h3 class="font-headline-lg text-headline-lg relative z-10">10 Years</h3>
+<p class="font-body-md text-body-md opacity-90 relative z-10">Of Cutoff Data Analyzed</p>
+</div>
+
+</div>
+</div>
+</section>
+<!-- How It Helps -->
+<section class="max-w-container-max mx-auto px-6 md:px-lg py-3xl flex flex-col gap-xl">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-primary mb-sm">Your Strategic Advantage</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Comprehensive tools designed to eliminate guesswork and secure your ideal seat.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Feature 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-lg shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-primary-fixed text-on-primary-fixed rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">AI Counselor</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Get instant, personalized answers to your counseling queries in a calm, chat-based interface.</p>
+<a class="text-secondary font-label-md text-label-md hover:underline inline-flex items-center gap-1" href="#">
+                        Try it now <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-lg shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">Rank Predictor</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Forecast your admission chances across categories and colleges using historical cutoff trends.</p>
+<a class="text-secondary font-label-md text-label-md hover:underline inline-flex items-center gap-1" href="#">
+                        Predict my rank <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-lg shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow">
+<div class="w-12 h-12 bg-surface-variant text-on-surface-variant rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">travel_explore</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-xs">College Explorer</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Filter and shortlist institutions based on fees, location, and infrastructure.</p>
+<a class="text-secondary font-label-md text-label-md hover:underline inline-flex items-center gap-1" href="#">
+                        Explore directory <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- FAQ -->
+<section class="bg-surface-container-low py-3xl">
+<div class="max-w-[800px] mx-auto px-6 md:px-lg flex flex-col gap-lg">
+<div class="text-center">
+<h2 class="font-headline-md text-headline-md text-primary mb-sm">Frequently Asked Questions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Clear answers for a stress-free process.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<details class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 group [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between cursor-pointer p-md font-label-md text-label-md text-primary">
+                            How accurate is the Rank Predictor?
+                            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-md pb-md pt-0 font-body-md text-body-md text-on-surface-variant">
+                            Our predictor uses 10 years of official TS EAMCET allotment data, achieving a high degree of accuracy. However, yearly variations in seat matrix and candidate performance can introduce slight shifts.
+                        </div>
+</details>
+<details class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 group [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between cursor-pointer p-md font-label-md text-label-md text-primary">
+                            Can parents use the platform too?
+                            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-md pb-md pt-0 font-body-md text-body-md text-on-surface-variant">
+                            Absolutely. The interface is designed to be intuitive for both students and parents, providing clear data visualisations to facilitate informed family decisions.
+                        </div>
+</details>
+<details class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/20 group [&amp;_summary::-webkit-details-marker]:hidden">
+<summary class="flex items-center justify-between cursor-pointer p-md font-label-md text-label-md text-primary">
+                            Is the AI Counselor available 24/7?
+                            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="px-md pb-md pt-0 font-body-md text-body-md text-on-surface-variant">
+                            Yes, our AI Counselor is available round-the-clock to answer your procedural questions, explain counseling phases, and provide definitions for technical terms.
+                        </div>
+</details>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-dim full-width mt-auto border-t border-outline-variant border-b-0">
+<div class="w-full py-xl px-6 md:px-lg flex flex-col md:flex-row justify-between items-center gap-md max-w-container-max mx-auto">
+<div class="flex flex-col items-center md:items-start gap-xs">
+<span class="text-headline-sm font-headline-sm font-bold text-primary">College Kurchi</span>
+<span class="text-caption font-caption text-on-surface-variant">© 2024 College Kurchi. Your steady guide to TS EAMCET counseling.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-x-md gap-y-sm">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Terms of Service</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Contact Support</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">About Us</a>
+</nav>
+</div>
+</footer>
+
+
+</body></html>

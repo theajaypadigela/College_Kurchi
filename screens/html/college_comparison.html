@@ -1,0 +1,346 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>College Comparison - College Kurchi</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-variant": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary-container": "#90a8ff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-background": "#191c1e",
+                    "on-surface-variant": "#444651",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#6e2c00",
+                    "background": "#f7f9fb",
+                    "secondary": "#006a61",
+                    "on-tertiary-fixed-variant": "#773205",
+                    "on-tertiary-container": "#f39461",
+                    "outline": "#757682",
+                    "surface-tint": "#4059aa",
+                    "on-tertiary-fixed": "#341100",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "tertiary-fixed": "#ffdbcb",
+                    "on-secondary-container": "#006f66",
+                    "on-surface": "#191c1e",
+                    "secondary-fixed": "#89f5e7",
+                    "secondary-container": "#86f2e4",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#1e3a8a",
+                    "primary": "#00236f",
+                    "tertiary": "#4b1c00",
+                    "outline-variant": "#c5c5d3",
+                    "on-primary-fixed-variant": "#264191",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#00164e",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b6c4ff",
+                    "inverse-surface": "#2d3133",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "2xl": "48px",
+                    "base": "8px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "container-max": "1200px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl-mobile": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Custom scrollbar for comparison table */
+        .comparison-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        .comparison-scroll::-webkit-scrollbar-track {
+            background: #f2f4f6; /* surface-container-low */
+            border-radius: 4px;
+        }
+        .comparison-scroll::-webkit-scrollbar-thumb {
+            background: #c5c5d3; /* outline-variant */
+            border-radius: 4px;
+        }
+        .comparison-scroll::-webkit-scrollbar-thumb:hover {
+            background: #757682; /* outline */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 py-lg px-md w-64 border-r border-outline-variant bg-surface-container-lowest z-40">
+<div class="flex items-center gap-sm px-sm mb-xl">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold">CK</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-extrabold text-primary">Counseling Portal</h1>
+<p class="text-caption font-caption text-on-surface-variant">TS EAMCET 2024</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs">
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="home">home</span>
+<span class="text-label-md font-label-md">Home</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="smart_toy">smart_toy</span>
+<span class="text-label-md font-label-md">AI Counselor</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="travel_explore">travel_explore</span>
+<span class="text-label-md font-label-md">College Finder</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="trending_up">trending_up</span>
+<span class="text-label-md font-label-md">Cutoff Trends</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark">bookmark</span>
+<span class="text-label-md font-label-md">Shortlist</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container rounded-lg font-bold scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="compare_arrows" data-weight="fill" style="font-variation-settings: 'FILL' 1;">compare_arrows</span>
+<span class="text-label-md font-label-md">Comparison</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-xs pt-md border-t border-outline-variant">
+<button class="w-full py-sm bg-primary text-on-primary rounded-lg text-label-md font-label-md font-medium hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200 mb-md">
+                Start Predicting
+            </button>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+<span class="text-label-md font-label-md">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col w-full lg:ml-64 relative">
+<!-- TopNavBar -->
+<header class="top-0 sticky z-30 shadow-sm bg-surface flex justify-between items-center w-full px-6 md:px-lg h-16">
+<div class="flex items-center lg:hidden">
+<span class="text-headline-md font-headline-md font-bold text-primary">College Kurchi</span>
+</div>
+<!-- Navigation Links (Web) -->
+<nav class="hidden md:flex items-center gap-lg ml-auto mr-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-md font-label-md" href="#">Explorer</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-md font-label-md" href="#">Predictor</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 text-label-md font-label-md" href="#">Shortlist</a>
+</nav>
+<div class="flex items-center gap-md ml-auto lg:ml-0">
+<!-- Search Bar Placeholder (on_right) -->
+<div class="hidden sm:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-transparent focus-within:border-secondary focus-within:bg-surface transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md w-48 text-on-surface placeholder:text-outline py-xs" placeholder="Search colleges..." type="text">
+</div>
+<div class="flex items-center gap-sm text-primary">
+<button class="p-xs hover:bg-surface-container-low rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs hover:bg-surface-container-low rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+<button class="hidden sm:block px-md py-xs bg-primary-container text-on-primary-container rounded-lg text-label-md font-label-md hover:opacity-80 transition-opacity duration-150 border border-primary-container">
+                    Consult AI
+                </button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 w-full max-w-container-max mx-auto px-6 py-lg md:px-lg md:py-xl">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-md mb-xl">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-surface mb-xs">Compare Colleges</h2>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">Evaluate up to 3 institutions side-by-side to make an informed decision for your future.</p>
+</div>
+<button class="flex items-center justify-center gap-xs px-md py-sm bg-surface border border-outline-variant text-primary rounded-lg hover:bg-surface-container transition-colors text-label-md font-label-md shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Export PDF
+                </button>
+</div>
+<!-- Comparison Selection & Table Container -->
+<div class="bg-surface rounded-xl shadow-[0px_4px_20px_rgba(30,58,138,0.05)] border border-surface-variant overflow-hidden">
+<div class="w-full overflow-x-auto comparison-scroll">
+<div class="min-w-[800px] w-full grid grid-cols-4 divide-x divide-surface-variant">
+<!-- Column 1: Labels -->
+<div class="bg-surface-container-lowest p-md flex flex-col justify-end">
+<div class="text-body-md font-body-md text-on-surface-variant mb-md font-medium">Comparison Metrics</div>
+</div>
+<!-- Column 2: College A -->
+<div class="bg-surface-container-lowest p-md relative group">
+<button class="absolute top-sm right-sm text-outline hover:text-error transition-colors p-xs rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="w-12 h-12 rounded-lg bg-primary-fixed-dim mb-sm flex items-center justify-center overflow-hidden">
+<img alt="College Logo" class="w-full h-full object-cover" data-alt="A close-up architectural detail of a modern university building featuring sleek glass facades and white concrete pillars. The scene is lit by bright, natural daylight conveying a modern light-mode aesthetic. The composition implies academic excellence and institutional prestige within a minimalist style framework. Subtle reflections of a clear blue sky are visible in the glass." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDumV14BG_7G7Zjfy38mfGGd6Ufwrd8KzkoJuT4Lor7Y1icfG3wNRTVirUQtg4nOs8NwAAx-bj17q2AsTpkxKpcJqfXOSgy4cys6K27XfMd6KTGFe1XkpVkWb9SyvJG4uCXAjg6KmhQ5wPbHaZLBbYVy6NS6p3l5V5VGiSgNaMf73WJI9bi0cyCYsIrQrYdpNVLflbPnMLe78VCi4ZSl4-kG1ZzCzpG6innGVbh0apJbbKpLw7JXBGISMeTfnTBcKZYl864ftUmKNMx">
+</div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold leading-tight mb-xs">Chaitanya Bharathi Institute of Technology (CBIT)</h3>
+<p class="text-caption font-caption text-on-surface-variant">Autonomous • NAAC A++</p>
+</div>
+<!-- Column 3: College B -->
+<div class="bg-surface-container-lowest p-md relative group">
+<button class="absolute top-sm right-sm text-outline hover:text-error transition-colors p-xs rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed-dim mb-sm flex items-center justify-center overflow-hidden">
+<img alt="College Logo" class="w-full h-full object-cover" data-alt="An abstract, stylized shot of a university campus pathway lined with manicured greenery and contemporary brickwork. The lighting is soft and diffused, creating a serene and trustworthy atmosphere typical of modern UI aesthetics. Deep shadows anchor the light-colored stonework, emphasizing structural stability and academic growth. The mood is calm and inviting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXQ5eLu_dzW6xZyvRja1QYrv2BpMNSwN6rrqRRaRJJGJmD6UtXlIN_GqLDF2Lh9dLP-xWwcZGrzw6cAWx_V_zqvH3Wj-Rl0_3gSFRUWYwAOG5YNF10JIu_v051CTU2o27YRTagRS6Es9Hsqek2BhX6SREq72fKZjwH88rPGFNgNMASx25FL83dL0K8Uo3CL3ZBBA7R4K0ijcFL2fE2fAiM0QwiSJ8mNfoquMN9hmIMaJhFdEPTtmFy0077f0HND6cdKYIdyP6zA9ei">
+</div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold leading-tight mb-xs">VNR Vignana Jyothi Institute of Engineering</h3>
+<p class="text-caption font-caption text-on-surface-variant">Autonomous • NAAC A++</p>
+</div>
+<!-- Column 4: Empty Slot -->
+<div class="bg-surface-container-low p-md flex flex-col items-center justify-center min-h-[160px] border-2 border-dashed border-outline-variant m-sm rounded-lg cursor-pointer hover:bg-surface-container transition-colors group">
+<div class="w-10 h-10 rounded-full bg-surface text-primary flex items-center justify-center mb-sm shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="text-label-md font-label-md text-primary font-medium">Add College</span>
+<span class="text-caption font-caption text-on-surface-variant mt-xs text-center">Select a 3rd option to compare</span>
+</div>
+</div>
+<!-- Data Rows -->
+<div class="min-w-[800px] w-full grid grid-cols-4 divide-x divide-surface-variant border-t border-surface-variant">
+<!-- Row: Location -->
+<div class="bg-surface p-md flex items-center text-label-md font-label-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-sm">location_on</span> Location
+                        </div>
+<div class="bg-surface p-md flex items-center text-body-md font-body-md text-on-surface">Gandipet, Hyderabad</div>
+<div class="bg-surface p-md flex items-center text-body-md font-body-md text-on-surface">Bachupally, Hyderabad</div>
+<div class="bg-surface p-md bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#f2f4f6_10px,#f2f4f6_20px)] opacity-50"></div>
+<!-- Row: Tuition Fee -->
+<div class="bg-surface p-md flex items-center text-label-md font-label-md text-on-surface-variant border-t border-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-sm">payments</span> Tuition Fee (Per Year)
+                        </div>
+<div class="bg-surface p-md flex items-center border-t border-surface-variant">
+<span class="text-body-md font-body-md text-on-surface">₹ 1,40,000</span>
+</div>
+<div class="bg-surface-container-lowest p-md flex items-center border-t border-surface-variant relative overflow-hidden">
+<!-- Better Option Highlight -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex items-center gap-sm">
+<span class="text-body-md font-body-md text-on-surface font-semibold">₹ 1,35,000</span>
+<span class="inline-flex items-center px-xs py-[2px] rounded text-[10px] font-bold bg-secondary-container text-on-secondary-container uppercase tracking-wider">Lower Fee</span>
+</div>
+</div>
+<div class="bg-surface p-md border-t border-surface-variant bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#f2f4f6_10px,#f2f4f6_20px)] opacity-50"></div>
+<!-- Row: Highest Placement -->
+
+
+
+
+<!-- Row: Average Placement -->
+
+
+
+
+<!-- Row: CSE Cutoff -->
+<div class="bg-surface p-md flex items-center text-label-md font-label-md text-on-surface-variant border-t border-surface-variant">
+<span class="material-symbols-outlined text-[18px] mr-sm">analytics</span> B.Tech CSE Cutoff (OC)
+                        </div>
+<div class="bg-surface-container-lowest p-md flex items-center border-t border-surface-variant relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex flex-col">
+<span class="text-body-md font-body-md text-on-surface font-semibold text-primary">Rank: 2,145</span>
+<span class="text-caption font-caption text-on-surface-variant">More Competitive</span>
+</div>
+</div>
+<div class="bg-surface p-md flex items-center border-t border-surface-variant">
+<span class="text-body-md font-body-md text-on-surface">Rank: 2,890</span>
+</div>
+<div class="bg-surface p-md border-t border-surface-variant bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#f2f4f6_10px,#f2f4f6_20px)] opacity-50"></div>
+</div>
+</div>
+</div>
+<!-- AI Recommendation Snippet -->
+<div class="mt-lg bg-secondary-container bg-opacity-20 rounded-xl p-md border border-secondary-container flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface font-semibold mb-xs">AI Counselor Insight</h4>
+<p class="text-body-md font-body-md text-on-surface-variant">Based on your preference for <strong class="text-on-surface">CSE</strong>, CBIT is slightly more competitive to enter, while VNR Vignana Jyothi offers a <strong class="text-on-surface">lower tuition fee</strong> structure for the same branch.</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto w-full py-xl px-lg flex flex-col md:flex-row justify-between items-center gap-md bg-surface-dim border-t border-outline-variant">
+<div class="text-headline-sm font-headline-sm font-bold text-primary">College Kurchi</div>
+<p class="text-caption font-caption text-on-surface-variant">© 2024 College Kurchi. Your steady guide to TS EAMCET counseling.</p>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">Contact Support</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">About Us</a>
+</div>
+</footer>
+</main>
+
+
+</body></html>

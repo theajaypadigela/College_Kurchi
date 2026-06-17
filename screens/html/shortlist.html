@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Shortlist - College Kurchi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-variant": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary-container": "#90a8ff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-background": "#191c1e",
+                    "on-surface-variant": "#444651",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#6e2c00",
+                    "background": "#f7f9fb",
+                    "secondary": "#006a61",
+                    "on-tertiary-fixed-variant": "#773205",
+                    "on-tertiary-container": "#f39461",
+                    "outline": "#757682",
+                    "surface-tint": "#4059aa",
+                    "on-tertiary-fixed": "#341100",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "tertiary-fixed": "#ffdbcb",
+                    "on-secondary-container": "#006f66",
+                    "on-surface": "#191c1e",
+                    "secondary-fixed": "#89f5e7",
+                    "secondary-container": "#86f2e4",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#1e3a8a",
+                    "primary": "#00236f",
+                    "tertiary": "#4b1c00",
+                    "outline-variant": "#c5c5d3",
+                    "on-primary-fixed-variant": "#264191",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#00164e",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b6c4ff",
+                    "inverse-surface": "#2d3133",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "2xl": "48px",
+                    "base": "8px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "container-max": "1200px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl-mobile": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+            },
+            "boxShadow": {
+                'ambient': '0px 4px 20px rgba(30, 58, 138, 0.05)',
+                'elevated': '0px 10px 30px rgba(30, 58, 138, 0.10)',
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+        .sortable-ghost {
+            opacity: 0.4;
+            background-color: #f2f4f6; /* surface-container-low */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden flex flex-col lg:flex-row min-h-screen">
+<!-- TopNavBar (Mobile Only) -->
+<header class="lg:hidden docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none bg-surface dark:bg-inverse-surface flex justify-between items-center w-full px-6 md:px-lg max-w-container-max mx-auto h-16">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">
+            College Kurchi
+        </div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary cursor-pointer hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-200 p-2 rounded-full">search</span>
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary cursor-pointer hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-200 p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary cursor-pointer hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-200 p-2 rounded-full">account_circle</span>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden lg:flex flex-col h-screen fixed left-0 top-0 py-lg px-md h-full w-64 border-r border-outline-variant dark:border-outline bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant z-40">
+<div class="mb-2xl px-sm">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary tracking-tight">
+                College Kurchi
+            </div>
+<div class="text-label-md font-label-md text-on-surface-variant mt-xs">
+                TS EAMCET 2024
+            </div>
+</div>
+<div class="flex-1 overflow-y-auto pr-xs">
+<ul class="space-y-sm">
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">home</span>
+<span class="text-label-md font-label-md">Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">smart_toy</span>
+<span class="text-label-md font-label-md">AI Counselor</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">travel_explore</span>
+<span class="text-label-md font-label-md">College Finder</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">trending_up</span>
+<span class="text-label-md font-label-md">Cutoff Trends</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-lg font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span class="text-label-md font-label-md">Shortlist</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">compare_arrows</span>
+<span class="text-label-md font-label-md">Comparison</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-sm">
+<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-sm px-md rounded-lg text-label-md font-label-md hover:opacity-90 transition-opacity">
+                Start Predicting
+            </button>
+<ul class="space-y-xs">
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-label-md">help_outline</span>
+<span class="text-label-md font-label-md">Help</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 lg:ml-64 overflow-y-auto bg-background p-md lg:p-xl flex flex-col gap-lg pb-3xl relative">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-outline-variant/20 pb-md">
+<div>
+<h1 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl-mobile md:font-headline-xl text-primary mb-xs">My Choices</h1>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-2xl">
+                    Review and finalize your preferred college list. Drag handles to adjust priority order before web counseling.
+                </p>
+</div>
+<div class="flex flex-wrap items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm border-2 border-secondary text-secondary rounded-lg hover:bg-secondary/5 transition-colors text-label-md font-label-md font-bold">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span>
+                    Compare Shortlist
+                </button>
+<button class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary rounded-lg shadow-sm hover:opacity-90 transition-opacity text-label-md font-label-md font-bold">
+<span class="material-symbols-outlined text-[18px]">send</span>
+                    Send to Counselor
+                </button>
+</div>
+</header>
+<!-- Bento Stats Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Stat 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-ambient flex items-start justify-between border border-outline-variant/10">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant mb-xs">Saved Colleges</p>
+<p class="text-headline-lg font-headline-lg text-primary">05</p>
+</div>
+<div class="bg-primary/10 p-sm rounded-full text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-ambient flex items-start justify-between border border-outline-variant/10">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant mb-xs">Avg. Fee of Shortlist</p>
+<p class="text-headline-md font-headline-md text-on-background">₹1.15L <span class="text-caption font-caption text-on-surface-variant font-normal">/yr</span></p>
+</div>
+<div class="bg-secondary/10 p-sm rounded-full text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined">payments</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-ambient flex items-start justify-between border border-outline-variant/10">
+<div>
+<p class="text-label-md font-label-md text-on-surface-variant mb-xs">Top Branch in List</p>
+<p class="text-body-lg font-body-lg text-on-background font-semibold">Computer Science</p>
+<div class="mt-xs inline-flex px-xs py-[2px] bg-secondary-container/50 text-on-secondary-container rounded text-caption font-caption font-medium">
+                        3 options
+                    </div>
+</div>
+<div class="bg-surface-container-high p-sm rounded-full text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined">code</span>
+</div>
+</div>
+</section>
+<!-- Reorderable List Section -->
+<section class="flex flex-col flex-1">
+<div class="flex items-center justify-between mb-md">
+<h2 class="text-headline-md font-headline-md text-on-background flex items-center gap-xs">
+                    Priority List
+                    <span class="material-symbols-outlined text-outline text-[20px] cursor-help" title="Drag to reorder based on your preference for web counseling options.">info</span>
+</h2>
+<span class="text-label-md font-label-md text-on-surface-variant bg-surface-container px-sm py-xs rounded-full">Web Options Ready</span>
+</div>
+<!-- List Container -->
+<div class="flex flex-col gap-sm" id="shortlist-container">
+<!-- Item 1 -->
+<div class="group bg-surface-container-lowest rounded-xl p-sm md:p-md shadow-ambient border border-outline-variant/20 flex items-center gap-md hover:border-secondary/50 transition-colors relative z-10 hover:z-20 hover:shadow-elevated">
+<!-- Drag Handle -->
+<div class="drag-handle cursor-grab text-outline-variant hover:text-primary transition-colors flex items-center justify-center p-xs">
+<span class="material-symbols-outlined text-[28px]">drag_indicator</span>
+</div>
+<!-- Priority Rank -->
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-label-md font-label-md font-bold shadow-sm shrink-0">
+                        1
+                    </div>
+<!-- Details -->
+<div class="flex-1 flex flex-col md:flex-row md:items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low overflow-hidden shrink-0 border border-outline-variant/10 hidden sm:block">
+<img class="w-full h-full object-cover" data-alt="A bright, modern college campus building made of pale stone and glass under a clear blue sky. The lighting is high-key and optimistic, representing academic excellence. Lush green trees frame the bottom of the shot. The visual style is crisp, professional, and minimalist, matching a high-end educational platform's modern UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR6XcJFmGYXbCsuI6Ip3LIBncweVbz-65iYxBb38nH6sJFV21KWhCJkz3ksr1vHur4T88VMPLA4rYMf4KZ-hBgFWboxc7wgcuHIWnYT9obDAomjhKGLwVH9tp2-1f6j9Pka-yUFSuJpVCrZF-kpING-iwmSSuOmpMsfYL_1WELqZXc4vyVceNik7YGDePxQfDaNTi0K97FFunZxOz4fgvr_OWSl7Xmgmi9OV6Jjj7PpYust6pfFn6DwsAHlehDPPAMl4v2gC-I0Vmd"/>
+</div>
+<div class="flex-1">
+<h3 class="text-body-lg font-body-lg text-primary font-semibold mb-[2px] pr-8">Jawaharlal Nehru Technological University (JNTUH)</h3>
+<div class="flex flex-wrap items-center gap-x-sm gap-y-xs text-caption font-caption text-on-surface-variant">
+<span class="flex items-center gap-[2px]"><span class="material-symbols-outlined text-[14px]">location_on</span> Kukatpally, Hyd</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant hidden md:block"></span>
+<span class="flex items-center gap-[2px] text-secondary font-medium"><span class="material-symbols-outlined text-[14px]">school</span> B.Tech - Computer Science Engineering</span>
+</div>
+</div>
+<!-- Metadata/Metrics -->
+<div class="flex md:flex-col items-center md:items-end gap-sm md:gap-xs text-right mt-sm md:mt-0 shrink-0">
+<div class="text-body-md font-body-md text-on-background font-medium">₹1,00,000 <span class="text-caption font-caption text-on-surface-variant font-normal">/yr</span></div>
+<div class="bg-surface-container-high px-2 py-1 rounded text-caption font-caption text-on-surface-variant flex items-center gap-1">
+                                Est. Cutoff Rank: <strong>1,200</strong>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="shrink-0 ml-auto md:ml-sm border-l border-outline-variant/20 pl-sm md:pl-md">
+<button class="text-outline hover:text-error transition-colors p-sm rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group bg-surface-container-lowest rounded-xl p-sm md:p-md shadow-ambient border border-outline-variant/20 flex items-center gap-md hover:border-secondary/50 transition-colors relative z-10 hover:z-20 hover:shadow-elevated">
+<div class="drag-handle cursor-grab text-outline-variant hover:text-primary transition-colors flex items-center justify-center p-xs">
+<span class="material-symbols-outlined text-[28px]">drag_indicator</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-label-md font-label-md font-bold shrink-0">
+                        2
+                    </div>
+<div class="flex-1 flex flex-col md:flex-row md:items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low overflow-hidden shrink-0 border border-outline-variant/10 hidden sm:block">
+<img class="w-full h-full object-cover" data-alt="An abstract, minimalist architectural detail of an educational institute showing clean lines, white concrete, and soft shadows. High-key lighting emphasizes a light-mode, premium aesthetic. The mood is calm and structured, reflecting modern web UI design principles with a focus on trust and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6GpsE_j7ou90uTX2RfEKE5bcKJc80UJllO3ihwrB-GCAqieHcKuIvRP0bCY4NNcKi7m6zU1SV0uhW5-xxthdcl0M2yaDOyZtHTcPYiAV3xohk76-BZpTqpljP5Do-3Whwq71z-TjmGvvP7mj_4uZdCSB4Ldyknp5YqvwzDQ5-6mXdhMG3gqYDerRVGQWEC3pKpDvZLQ3_IbxgCVg2jH66qDFa9gT7GqomDI67oCUat3Sb7PcyS-oGr86KqXhD_U6N_OmzO6ZeIQTs"/>
+</div>
+<div class="flex-1">
+<h3 class="text-body-lg font-body-lg text-primary font-semibold mb-[2px] pr-8">Osmania University College of Engineering</h3>
+<div class="flex flex-wrap items-center gap-x-sm gap-y-xs text-caption font-caption text-on-surface-variant">
+<span class="flex items-center gap-[2px]"><span class="material-symbols-outlined text-[14px]">location_on</span> Tarnaka, Hyd</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant hidden md:block"></span>
+<span class="flex items-center gap-[2px] text-secondary font-medium"><span class="material-symbols-outlined text-[14px]">school</span> B.Tech - Computer Science Engineering</span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end gap-sm md:gap-xs text-right mt-sm md:mt-0 shrink-0">
+<div class="text-body-md font-body-md text-on-background font-medium">₹35,000 <span class="text-caption font-caption text-on-surface-variant font-normal">/yr</span></div>
+<div class="bg-surface-container-high px-2 py-1 rounded text-caption font-caption text-on-surface-variant flex items-center gap-1">
+                                Est. Cutoff Rank: <strong>1,800</strong>
+</div>
+</div>
+</div>
+<div class="shrink-0 ml-auto md:ml-sm border-l border-outline-variant/20 pl-sm md:pl-md">
+<button class="text-outline hover:text-error transition-colors p-sm rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group bg-surface-container-lowest rounded-xl p-sm md:p-md shadow-ambient border border-outline-variant/20 flex items-center gap-md hover:border-secondary/50 transition-colors relative z-10 hover:z-20 hover:shadow-elevated">
+<div class="drag-handle cursor-grab text-outline-variant hover:text-primary transition-colors flex items-center justify-center p-xs">
+<span class="material-symbols-outlined text-[28px]">drag_indicator</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-label-md font-label-md font-bold shrink-0">
+                        3
+                    </div>
+<div class="flex-1 flex flex-col md:flex-row md:items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low overflow-hidden shrink-0 border border-outline-variant/10 hidden sm:block">
+<img class="w-full h-full object-cover" data-alt="A bright, airy interior shot of a modern college library or study hall. Natural daylight streams through large windows, casting soft shadows across clean white desks and minimalist seating. The overarching aesthetic is serene, focused, and academic, perfectly matching a premium, light-mode educational interface design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_O1DaoBPe76D-69jLcyT8_-PYCFNi3yoqzzjc7zX0gDcBDDhVAkO8aPcnGFqAWzw2dEXbC_omBjFufQ_R5NWEHsewn3z_3T_TEFsb9KJoWURcdMAE5rUZJ0E8eA4sTV7jAtEhEUXWl4DpTOGgss2hs_-lEMoW69mhmGuq6tWLlhgxYHmRDxkDtnFS8cyhyZjUQr9svXrl58rQu58IAPT1fuFB1o2PWh0oWgJ6zNnp8jZ4HONghRMVCUkFxco9evg4iE11q3a3HpGJ"/>
+</div>
+<div class="flex-1">
+<h3 class="text-body-lg font-body-lg text-primary font-semibold mb-[2px] pr-8">Chaitanya Bharathi Institute of Technology (CBIT)</h3>
+<div class="flex flex-wrap items-center gap-x-sm gap-y-xs text-caption font-caption text-on-surface-variant">
+<span class="flex items-center gap-[2px]"><span class="material-symbols-outlined text-[14px]">location_on</span> Gandipet, Hyd</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant hidden md:block"></span>
+<span class="flex items-center gap-[2px] text-tertiary-container font-medium"><span class="material-symbols-outlined text-[14px]">school</span> B.Tech - Information Technology</span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end gap-sm md:gap-xs text-right mt-sm md:mt-0 shrink-0">
+<div class="text-body-md font-body-md text-on-background font-medium">₹1,40,000 <span class="text-caption font-caption text-on-surface-variant font-normal">/yr</span></div>
+<div class="bg-surface-container-high px-2 py-1 rounded text-caption font-caption text-on-surface-variant flex items-center gap-1">
+                                Est. Cutoff Rank: <strong>3,500</strong>
+</div>
+</div>
+</div>
+<div class="shrink-0 ml-auto md:ml-sm border-l border-outline-variant/20 pl-sm md:pl-md">
+<button class="text-outline hover:text-error transition-colors p-sm rounded-full hover:bg-error-container/50">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State / Add More (Optional context) -->
+<button class="mt-md w-full border-2 border-dashed border-outline-variant rounded-xl p-md flex flex-col items-center justify-center text-on-surface-variant hover:border-secondary hover:text-secondary hover:bg-secondary/5 transition-all duration-200">
+<span class="material-symbols-outlined text-[32px] mb-xs">add_circle</span>
+<span class="text-label-md font-label-md font-medium">Search &amp; Add More Colleges</span>
+</button>
+</section>
+</main>
+</body></html>

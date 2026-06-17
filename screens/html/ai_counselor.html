@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI College Counselor - College Kurchi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary-container": "#90a8ff",
+                        "on-secondary-fixed": "#00201d",
+                        "on-background": "#191c1e",
+                        "on-surface-variant": "#444651",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#6e2c00",
+                        "background": "#f7f9fb",
+                        "secondary": "#006a61",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-tertiary-container": "#f39461",
+                        "outline": "#757682",
+                        "surface-tint": "#4059aa",
+                        "on-tertiary-fixed": "#341100",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "tertiary-fixed": "#ffdbcb",
+                        "on-secondary-container": "#006f66",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed": "#89f5e7",
+                        "secondary-container": "#86f2e4",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-bright": "#f7f9fb",
+                        "primary-container": "#1e3a8a",
+                        "primary": "#00236f",
+                        "tertiary": "#4b1c00",
+                        "outline-variant": "#c5c5d3",
+                        "on-primary-fixed-variant": "#264191",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#00164e",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b6c4ff",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "2xl": "48px",
+                        "base": "8px",
+                        "3xl": "64px",
+                        "md": "16px",
+                        "container-max": "1200px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl-mobile": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "caption": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for chat area */
+        .chat-scroll::-webkit-scrollbar { width: 6px; }
+        .chat-scroll::-webkit-scrollbar-track { background: transparent; }
+        .chat-scroll::-webkit-scrollbar-thumb { background-color: #e0e3e5; border-radius: 20px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden flex h-screen">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden fixed top-0 w-full z-50 bg-surface shadow-sm flex justify-between items-center px-6 h-16">
+<div class="text-headline-md font-headline-md font-bold text-primary">College Kurchi</div>
+<button class="text-primary"><span class="material-symbols-outlined">menu</span></button>
+</nav>
+<!-- SideNavBar (Desktop) - Rendered from JSON -->
+<aside class="hidden lg:flex flex-col h-screen fixed left-0 top-0 py-lg px-md w-64 bg-surface-container-lowest border-r border-outline-variant z-40">
+<!-- Header -->
+<div class="mb-xl px-sm">
+<div class="text-headline-md font-headline-md font-extrabold text-primary mb-xs">College Kurchi</div>
+<div class="text-label-md font-label-md text-on-surface-variant font-medium">Counseling Portal</div>
+<div class="text-caption font-caption text-outline">TS EAMCET 2024</div>
+</div>
+<!-- Main Navigation -->
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+                Home
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-sm px-md py-sm bg-secondary-container text-on-secondary-container rounded-lg font-bold text-label-md font-label-md opacity-80 transition-opacity duration-150 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                AI Counselor
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">travel_explore</span>
+                College Finder
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+                Cutoff Trends
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+                Shortlist
+            </a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+                Comparison
+            </a>
+</nav>
+<!-- CTA & Footer Nav -->
+<div class="mt-auto pt-lg border-t border-outline-variant/30 space-y-md px-sm">
+<button class="w-full bg-primary text-on-primary py-sm rounded-full text-label-md font-label-md font-medium hover:bg-primary/90 transition-colors">Start Predicting</button>
+<div class="space-y-xs pt-sm">
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg text-label-md font-label-md transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                    Help
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 flex flex-col h-full pt-16 lg:pt-0">
+<!-- Top App Bar / Title Area (Desktop) -->
+<header class="hidden lg:flex items-center justify-between px-xl py-lg bg-background">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-background">AI Counselor</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-xs">Your steady guide to admissions clarity.</p>
+</div>
+<!-- Live Status Indicator -->
+<div class="flex items-center gap-sm bg-surface-container-lowest border border-outline-variant/30 px-md py-xs rounded-full shadow-sm">
+<div class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
+</div>
+<span class="text-label-md font-label-md text-secondary font-semibold">Live Counselor Online</span>
+</div>
+</header>
+<!-- Chat Workspace Layout -->
+<div class="flex-1 flex flex-col md:flex-row gap-lg px-md lg:px-xl pb-lg lg:pb-xl overflow-hidden h-full">
+<!-- Left Sidebar: Suggested Questions (Glassmorphism inspired card) -->
+<aside class="hidden md:flex flex-col w-80 shrink-0 bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/30 rounded-xl shadow-sm overflow-hidden h-full">
+<div class="p-lg border-b border-outline-variant/20 bg-surface-container-lowest">
+<h2 class="text-headline-md font-headline-md text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">lightbulb</span>
+                        Suggested
+                    </h2>
+<p class="text-caption font-caption text-on-surface-variant mt-xs">Click a topic to start exploring.</p>
+</div>
+<div class="p-md space-y-sm overflow-y-auto chat-scroll">
+<!-- Suggestion Card 1 -->
+<button class="w-full text-left p-md rounded-lg border border-outline-variant/40 bg-surface hover:bg-surface-container-low hover:border-secondary/50 transition-all group">
+<span class="block text-label-md font-label-md text-on-background group-hover:text-primary transition-colors">Which colleges can I get for 15,000 rank?</span>
+<span class="block text-caption font-caption text-outline mt-xs flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">analytics</span> Rank Prediction</span>
+</button>
+<!-- Suggestion Card 2 -->
+<button class="w-full text-left p-md rounded-lg border border-outline-variant/40 bg-surface hover:bg-surface-container-low hover:border-secondary/50 transition-all group">
+<span class="block text-label-md font-label-md text-on-background group-hover:text-primary transition-colors">Explain the web options process</span>
+<span class="block text-caption font-caption text-outline mt-xs flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">list_alt</span> Procedure</span>
+</button>
+<!-- Suggestion Card 3 -->
+<button class="w-full text-left p-md rounded-lg border border-outline-variant/40 bg-surface hover:bg-surface-container-low hover:border-secondary/50 transition-all group">
+<span class="block text-label-md font-label-md text-on-background group-hover:text-primary transition-colors">Top 10 Engineering colleges in Hyderabad</span>
+<span class="block text-caption font-caption text-outline mt-xs flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">location_city</span> Discovery</span>
+</button>
+<!-- Suggestion Card 4 -->
+<button class="w-full text-left p-md rounded-lg border border-outline-variant/40 bg-surface hover:bg-surface-container-low hover:border-secondary/50 transition-all group">
+<span class="block text-label-md font-label-md text-on-background group-hover:text-primary transition-colors">Fee reimbursement eligibility criteria</span>
+<span class="block text-caption font-caption text-outline mt-xs flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">payments</span> Financial</span>
+</button>
+</div>
+</aside>
+<!-- Right Main: Chat Interface (Elevated Card) -->
+<section class="flex-1 flex flex-col bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-[0px_4px_20px_rgba(30,58,138,0.05)] overflow-hidden h-full relative">
+<!-- Mobile Header for Chat (visible only md-) -->
+<div class="lg:hidden p-md border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-lowest z-10">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="text-label-md font-label-md font-bold text-primary">AI Counselor</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+<span class="text-caption font-caption text-secondary">Live</span>
+</div>
+</div>
+<!-- Chat Messages Area -->
+<div class="flex-1 overflow-y-auto p-md lg:p-xl space-y-xl chat-scroll bg-gradient-to-b from-surface-container-lowest to-surface/30">
+<!-- AI Welcome Message -->
+<div class="flex gap-md max-w-3xl">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="text-caption font-caption text-outline ml-xs">Counselor AI • Just now</span>
+<div class="bg-secondary-container/50 text-on-secondary-container p-md rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm border border-secondary/10">
+                                Hello! I'm your College Kurchi AI Counselor. Navigating admissions can be stressful, but I'm here to provide steady guidance. How can I assist you with your TS EAMCET journey today?
+                            </div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-md max-w-3xl ml-auto flex-row-reverse">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div class="flex flex-col gap-xs items-end">
+<span class="text-caption font-caption text-outline mr-xs">You • 1 min ago</span>
+<div class="bg-primary text-on-primary p-md rounded-2xl rounded-tr-none text-body-md font-body-md shadow-sm">
+                                I got a rank of 15,400. What are my chances for CSE in a top 20 college?
+                            </div>
+</div>
+</div>
+<!-- AI Response (Typing / Loading state simulated, but showing actual response for design) -->
+<div class="flex gap-md max-w-3xl">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="text-caption font-caption text-outline ml-xs">Counselor AI • Typing...</span>
+<div class="bg-secondary-container/50 text-on-secondary-container p-md rounded-2xl rounded-tl-none text-body-md font-body-md shadow-sm border border-secondary/10 space-y-sm">
+<p>With a rank of <strong>15,400</strong>, securing Computer Science Engineering (CSE) in the absolute top 10 colleges might be highly competitive in the general category.</p>
+<p>However, you have a strong chance in reputable tier-2 institutions (ranked 11-30). Based on last year's cutoff trends, you should consider shortlisting these options:</p>
+<!-- Embedded UI Element in Chat -->
+<div class="bg-surface-container-lowest p-sm rounded-lg border border-outline-variant/30 mt-sm flex flex-col gap-xs">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-bold text-primary">CBIT (Self-Finance)</span>
+<span class="text-caption font-caption bg-secondary-container/30 text-secondary px-xs py-[2px] rounded">Borderline</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-bold text-primary">VNR VJIET</span>
+<span class="text-caption font-caption bg-secondary-container/30 text-secondary px-xs py-[2px] rounded">Moderate</span>
+</div>
+</div>
+<p class="text-sm mt-sm">Would you like me to generate a detailed predictor report for this rank?</p>
+</div>
+<!-- Action Chips below AI response -->
+<div class="flex flex-wrap gap-sm mt-xs">
+<button class="px-md py-xs rounded-full bg-secondary/10 text-on-secondary-fixed-variant text-label-md font-label-md hover:bg-secondary/20 transition-colors border border-secondary/20">Yes, generate report</button>
+<button class="px-md py-xs rounded-full bg-surface-container text-on-surface-variant text-label-md font-label-md hover:bg-surface-container-high transition-colors border border-outline-variant/30">Show IT branch options instead</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area (Bottom docked) -->
+<div class="p-md lg:p-lg bg-surface-container-lowest border-t border-outline-variant/20 z-10">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-low hover:bg-surface-container focus:bg-surface-container-lowest focus:ring-2 focus:ring-secondary/50 border border-transparent focus:border-secondary/30 rounded-full py-sm pl-lg pr-16 text-body-md font-body-md text-on-background placeholder:text-outline transition-all" placeholder="Type your counseling question here..." type="text"/>
+<button class="absolute right-sm top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container hover:shadow-md transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<div class="text-center mt-sm">
+<span class="text-caption font-caption text-outline">AI can make mistakes. Verify critical deadlines on the official TS EAMCET portal.</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

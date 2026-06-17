@@ -1,0 +1,428 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>College Details - College Kurchi</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from Style Guidance -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-variant": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "primary-fixed-dim": "#b6c4ff",
+                    "primary-fixed": "#dce1ff",
+                    "on-primary-container": "#90a8ff",
+                    "on-secondary-fixed": "#00201d",
+                    "on-background": "#191c1e",
+                    "on-surface-variant": "#444651",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#6e2c00",
+                    "background": "#f7f9fb",
+                    "secondary": "#006a61",
+                    "on-tertiary-fixed-variant": "#773205",
+                    "on-tertiary-container": "#f39461",
+                    "outline": "#757682",
+                    "surface-tint": "#4059aa",
+                    "on-tertiary-fixed": "#341100",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "tertiary-fixed": "#ffdbcb",
+                    "on-secondary-container": "#006f66",
+                    "on-surface": "#191c1e",
+                    "secondary-fixed": "#89f5e7",
+                    "secondary-container": "#86f2e4",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#1e3a8a",
+                    "primary": "#00236f",
+                    "tertiary": "#4b1c00",
+                    "outline-variant": "#c5c5d3",
+                    "on-primary-fixed-variant": "#264191",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#00164e",
+                    "tertiary-fixed-dim": "#ffb691",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b6c4ff",
+                    "inverse-surface": "#2d3133",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "2xl": "48px",
+                    "base": "8px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "container-max": "1200px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl-mobile": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["30px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Subtle ambient shadow for bento items, replacing standard tailwind shadows to match brand specs */
+        .ambient-shadow {
+            box-shadow: 0px 4px 20px rgba(30, 58, 138, 0.05);
+        }
+        
+        /* Custom scrollbar for main canvas */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e0e3e5; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c5c5d3; }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden antialiased">
+<!-- SideNavBar Component (From JSON) -->
+<nav class="hidden lg:flex flex-col h-screen fixed left-0 top-0 py-lg px-md h-full w-64 border-r border-outline-variant bg-surface-container-lowest z-40 shrink-0">
+<!-- Brand / Header -->
+<div class="mb-xl px-sm flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-bold font-headline-md text-headline-md shrink-0">
+                CK
+            </div>
+<div>
+<h1 class="text-headline-md font-headline-md font-extrabold text-primary">Counseling Portal</h1>
+<p class="text-label-md font-label-md text-on-surface-variant">TS EAMCET 2024</p>
+</div>
+</div>
+<!-- Primary Navigation -->
+<ul class="flex flex-col gap-xs flex-1">
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="text-label-md font-label-md">Home</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">smart_toy</span>
+<span class="text-label-md font-label-md">AI Counselor</span>
+</a>
+</li>
+<!-- Active State Navigation -->
+<li class="">
+<a aria-current="page" class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 scale-95 opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">travel_explore</span>
+<span class="text-label-md font-label-md">College Finder</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">trending_up</span>
+<span class="text-label-md font-label-md">Cutoff Trends</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bookmark</span>
+<span class="text-label-md font-label-md">Shortlist</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">compare_arrows</span>
+<span class="text-label-md font-label-md">Comparison</span>
+</a>
+</li>
+</ul>
+<!-- CTA Area -->
+<div class="mt-auto mb-lg px-sm">
+<button class="w-full py-sm px-md bg-primary text-on-primary rounded-lg font-label-md text-label-md font-medium flex items-center justify-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">auto_awesome</span>
+                Start Predicting
+            </button>
+</div>
+<!-- Footer Navigation -->
+<ul class="flex flex-col gap-xs border-t border-outline-variant pt-sm">
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help_outline</span>
+<span class="text-label-md font-label-md">Help</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 h-screen overflow-y-auto w-full relative">
+<!-- Mobile Top Nav Fallback (Minimal) -->
+<div class="lg:hidden sticky top-0 bg-surface/80 backdrop-blur-md border-b border-outline-variant px-md py-sm flex items-center justify-between z-30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">menu</span>
+<span class="text-headline-md font-headline-md text-primary font-bold">CK</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<div class="max-w-container-max mx-auto px-md lg:px-lg py-lg lg:py-xl space-y-xl">
+<!-- Breadcrumb / Back Navigation -->
+<nav class="flex items-center gap-sm text-on-surface-variant text-label-md font-label-md">
+<a class="hover:text-primary transition-colors flex items-center gap-xs" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    Back to College Finder
+                </a>
+<span class="text-outline">/</span>
+<span class="text-on-surface">CBIT Hyderabad</span>
+</nav>
+<!-- College Header Section (Glassmorphism inspired card) -->
+<header class="bg-surface rounded-xl p-lg md:p-xl border border-outline-variant ambient-shadow flex flex-col md:flex-row gap-lg items-start md:items-center justify-between relative overflow-hidden">
+<!-- Decorative background subtle element -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-fixed-dim/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+<div class="flex flex-col md:flex-row gap-lg items-start md:items-center relative z-10 w-full">
+<!-- Logo Area -->
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden bg-center bg-cover" data-alt="A clean, minimalist logo representation for a technical institute, featuring sharp geometric lines forming a stylized building facade in deep blue and teal tones, set against a pristine white background. The aesthetic is modern, authoritative, and uncluttered, suitable for a high-end educational platform. Soft ambient lighting ensures high contrast and legibility." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvvDW6HuyQXETBx0oC1M0jC21OlcOqRkm9jfs94JwYlc3Sqjr4faeoYPFajQNAK6Bau7k6Axm99uRdcBzEA14ZuZoq7CBJpoC5JjF-Dfft67prBOJvkrguMck3tSpO7-kD0oXHjcJITJLCEjlXOOwwWNA4QHBgR_-NClfAuo5IiWHRy7XSX1QoYG3lDZNnSXAYBiuThB7vBr4mqHyFW7SeImsnyVb5Ko6UhZbCvCXIg1YeI0BWg94irSURxaK9MRZohsQBDiR4dXqt');">
+<!-- Placeholder if image fails, handled visually by bg image above -->
+</div>
+<!-- Title & Meta -->
+<div class="flex-1 space-y-sm">
+<div class="flex items-center gap-sm flex-wrap">
+<span class="px-sm py-xs bg-secondary-container/50 text-on-secondary-container rounded-full text-caption font-label-md font-semibold border border-secondary-container">Code: CBIT</span>
+<span class="px-sm py-xs bg-surface-container-low text-on-surface-variant rounded-full text-caption font-label-md flex items-center gap-[4px]">
+<span class="material-symbols-outlined text-[14px]">verified</span> Autonomous
+                            </span>
+</div>
+<h2 class="text-headline-xl-mobile md:text-headline-xl font-headline-xl text-on-surface tracking-tight leading-tight">Chaitanya Bharathi Institute of Technology</h2>
+<p class="text-body-md font-body-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span> Gandipet, Hyderabad, Telangana
+                        </p>
+</div>
+<!-- Actions -->
+<div class="flex md:flex-col gap-sm shrink-0 mt-md md:mt-0 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-sm px-lg py-md bg-primary text-on-primary rounded-lg font-label-md text-label-md font-medium hover:bg-on-primary-fixed transition-colors shadow-sm">
+<span class="material-symbols-outlined">bookmark_add</span>
+                            Add to Shortlist
+                        </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-sm px-lg py-md bg-surface border border-secondary text-secondary rounded-lg font-label-md text-label-md font-medium hover:bg-secondary-container/20 transition-colors">
+<span class="material-symbols-outlined">download</span>
+                            Brochure
+                        </button>
+</div>
+</div>
+</header>
+<!-- Bento Grid Structure for Content -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md lg:gap-lg">
+<!-- Stat Card 1: Placement -->
+
+<!-- Stat Card 2: Avg Package -->
+
+<!-- Stat Card 3: NIRF Rank -->
+<div class="col-span-1 bg-surface rounded-xl p-lg border border-outline-variant ambient-shadow flex flex-col justify-between h-full">
+<div class="flex items-center justify-between text-on-surface-variant mb-xl">
+<span class="text-label-md font-label-md uppercase tracking-wider">NIRF Ranking</span>
+<span class="material-symbols-outlined text-primary-container">military_tech</span>
+</div>
+<div>
+<div class="flex items-baseline gap-xs">
+<span class="text-headline-xl font-headline-xl text-on-surface">151</span>
+<span class="text-body-md font-body-md text-on-surface-variant">/ 200</span>
+</div>
+<p class="text-caption font-caption text-on-surface-variant mt-xs">Engineering Category (2023)</p>
+</div>
+</div>
+<!-- Cutoff Trends Chart Area (Spans 2 cols on desktop) -->
+<div class="col-span-1 md:col-span-2 bg-surface rounded-xl p-lg border border-outline-variant ambient-shadow flex flex-col">
+<div class="flex items-center justify-between mb-lg">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Cutoff Trends</h3>
+<p class="text-label-md font-label-md text-on-surface-variant">Closing ranks for Open Category (Boys) over 3 years.</p>
+</div>
+<div class="flex gap-sm">
+<select class="bg-surface-container-low border-none rounded-md text-label-md font-label-md text-on-surface-variant py-xs px-sm focus:ring-secondary focus:ring-1">
+<option>CSE</option>
+<option>ECE</option>
+<option>IT</option>
+</select>
+</div>
+</div>
+<!-- Stylized SVG Line Chart Placeholder -->
+<div class="flex-1 relative min-h-[240px] w-full flex items-end justify-between px-md pt-xl border-b border-l border-surface-variant">
+<!-- Y Axis labels -->
+<div class="absolute left-0 bottom-0 h-full flex flex-col justify-between text-caption font-caption text-outline pb-lg -ml-lg">
+<span class="">1500</span>
+<span class="">2000</span>
+<span class="">2500</span>
+<span class="">3000</span>
+</div>
+<!-- Data Points & Lines -->
+<div class="relative w-full h-full flex items-end justify-around pb-md">
+<!-- SVG connecting line -->
+<svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+<path class="drop-shadow-sm" d="M 16% 40% L 50% 70% L 84% 20%" fill="none" stroke="#006a61" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Gradient fill under line -->
+<path d="M 16% 40% L 50% 70% L 84% 20% L 84% 100% L 16% 100% Z" fill="url(#gradient-teal)" opacity="0.1"></path>
+<defs>
+<linearGradient id="gradient-teal" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#006a61"></stop>
+<stop offset="100%" stop-color="#f7f9fb"></stop>
+</linearGradient>
+</defs>
+</svg>
+<!-- Data Point 2021 -->
+<div class="relative flex flex-col items-center group z-10 w-1/3">
+<div class="w-4 h-4 bg-surface border-2 border-secondary rounded-full absolute -top-[40%] transition-transform group-hover:scale-125"></div>
+<div class="absolute -top-[60%] bg-on-surface text-surface text-caption px-xs py-[2px] rounded opacity-0 group-hover:opacity-100 transition-opacity">2850</div>
+<span class="text-label-md font-label-md text-on-surface-variant mt-auto pt-sm border-t border-surface-variant w-full text-center">2021</span>
+</div>
+<!-- Data Point 2022 -->
+<div class="relative flex flex-col items-center group z-10 w-1/3">
+<div class="w-4 h-4 bg-surface border-2 border-secondary rounded-full absolute -top-[70%] transition-transform group-hover:scale-125"></div>
+<div class="absolute -top-[90%] bg-on-surface text-surface text-caption px-xs py-[2px] rounded opacity-0 group-hover:opacity-100 transition-opacity">2210</div>
+<span class="text-label-md font-label-md text-on-surface-variant mt-auto pt-sm border-t border-surface-variant w-full text-center">2022</span>
+</div>
+<!-- Data Point 2023 -->
+<div class="relative flex flex-col items-center group z-10 w-1/3">
+<div class="w-4 h-4 bg-surface border-2 border-secondary rounded-full absolute -top-[20%] transition-transform group-hover:scale-125 bg-secondary"></div>
+<div class="absolute -top-[40%] bg-on-surface text-surface text-caption px-xs py-[2px] rounded opacity-100">3100</div>
+<span class="text-label-md font-label-md text-on-surface mt-auto pt-sm border-t-2 border-secondary w-full text-center font-bold">2023</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Location/Map Area -->
+<div class="col-span-1 bg-surface rounded-xl p-0 border border-outline-variant ambient-shadow flex flex-col overflow-hidden">
+<div class="p-lg pb-sm">
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary">map</span> Campus Location
+                        </h3>
+</div>
+<div class="flex-1 w-full bg-surface-container-low min-h-[200px] relative">
+<!-- Simulated Map Image -->
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A stylized, top-down minimalist map view of a modern university campus layout located in Hyderabad. The map uses a very restricted palette of soft light grays for the background, very subtle white roads, and muted teal blocks indicating campus buildings. The style is highly abstracted, clean, and reduces cognitive load, resembling a high-end digital interface component rather than a realistic satellite photo." data-location="Hyderabad" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrCAj7-IdYzU5bo-Huag4uansOROl1p94lMZjOCcUmf3ZtQ34kSA1dwGkgqXvPG8fbWKcJr3kbZXgKa7ELxiPDK-6PoUbbcJqFjjD05XK7RQDrccfRRmDPibcWyQS3E1h5V5bmgV8Cn5Thx7y6J1s96HbmOZ9Mrm1M_RXt82Vl8wApoWVlzdLFZJjPbrUgn93ZiePcNEW_yuS5jMWB_ypwiMjoz87a8DTuA67kr7DCaiPyQmqJ3P134IpbWMZGN3wGFG9-qgEd7Eu2'); opacity: 0.8;"></div>
+<!-- Marker -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center animate-pulse">
+<div class="w-3 h-3 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="p-md bg-surface-container-lowest border-t border-outline-variant flex justify-between items-center">
+<span class="text-label-md font-label-md text-on-surface-variant truncate pr-sm">Gandipet, Hyderabad, 500075</span>
+<a class="text-secondary text-label-md font-label-md font-medium whitespace-nowrap hover:underline" href="#">View Map</a>
+</div>
+</div>
+<!-- Available Branches Table (Spans full width of bento) -->
+<div class="col-span-1 md:col-span-3 bg-surface rounded-xl border border-outline-variant ambient-shadow overflow-hidden flex flex-col">
+<div class="p-lg border-b border-outline-variant bg-surface-container-lowest">
+<h3 class="text-headline-md font-headline-md text-on-surface">Available Branches &amp; Intake</h3>
+<p class="text-label-md font-label-md text-on-surface-variant mt-xs">Details for undergraduate engineering programs (B.Tech) for the current academic year.</p>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md font-semibold">Branch Name</th>
+<th class="p-md font-label-md text-label-md font-semibold">Code</th>
+<th class="p-md font-label-md text-label-md font-semibold text-right">Intake Seats</th>
+<th class="p-md font-label-md text-label-md font-semibold text-right">Annual Fee (₹)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant bg-surface">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">computer</span>
+</div>
+                                        Computer Science and Engineering
+                                    </td>
+<td class="p-md font-label-md text-label-md text-on-surface-variant">CSE</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">180</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">1,40,000</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">data_object</span>
+</div>
+                                        Information Technology
+                                    </td>
+<td class="p-md font-label-md text-label-md text-on-surface-variant">INF</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">120</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">1,40,000</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">memory</span>
+</div>
+                                        Electronics and Communication Engg.
+                                    </td>
+<td class="p-md font-label-md text-label-md text-on-surface-variant">ECE</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">180</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">1,40,000</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">electric_bolt</span>
+</div>
+                                        Electrical and Electronics Engg.
+                                    </td>
+<td class="p-md font-label-md text-label-md text-on-surface-variant">EEE</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">120</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">1,40,000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Bottom padding for scroll -->
+<div class="h-xl"></div>
+</div>
+</main>
+
+
+</body></html>
