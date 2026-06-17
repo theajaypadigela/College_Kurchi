@@ -3,9 +3,12 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+from ..logging_config import get_logger
 from ..models import College, CompareRequest, CompareResponse
 from ..rag.llm import get_llm
 from .colleges import get_college
+
+logger = get_logger("services.comparison")
 
 SUMMARY_SYSTEM = (
     "You are College Kurchi. Compare the given TS EAMCET colleges using ONLY the facts "
@@ -101,7 +104,7 @@ def compare(req: CompareRequest) -> CompareResponse:
             if not summary:
                 summary = _template_summary(colleges, req)
         except Exception as exc:  # noqa: BLE001
-            print(f"[compare] LLM error, using template: {exc}")
+            logger.warning("LLM error, using template summary: %s", exc)
             summary = _template_summary(colleges, req)
     else:
         summary = _template_summary(colleges, req)
