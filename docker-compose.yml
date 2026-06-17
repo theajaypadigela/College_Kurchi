@@ -1,0 +1,53 @@
+# College Kurchi — full backend stack: MongoDB + one-shot seed + API.
+#
+#   GROQ_API_KEY=sk-... docker compose up --build      # with the AI counselor
+#   docker compose up --build                          # template fallback (no key)
+#
+# The `seed` service loads + chunks + embeds the dataset into Mongo once, then the
+# `api` service starts only after seeding completes and Mongo is healthy.
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  seed:
+    build: ./backend
+    command: ["python", "-m", "app.seed", "--drop"]
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      DATA_DIR: /data
+      EMBEDDING_BACKEND: ${EMBEDDING_BACKEND:-hashing}
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      MONGODB_URI: mongodb://mongo:27017
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+      EMBEDDING_BACKEND: ${EMBEDDING_BACKEND:-hashing}
+      JWT_SECRET: ${JWT_SECRET:-college-kurchi-dev-secret-change-in-prod}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:4173}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      seed:
+        condition: service_completed_successfully
+
+volumes:
+  mongo-data:
