@@ -1,3 +1,5 @@
+# Runtime dependencies. For tests/linting see requirements-dev.txt.
+
 # Core API
 fastapi>=0.115,<0.116
 uvicorn[standard]>=0.30
