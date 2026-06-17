@@ -1,0 +1,9 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.mongo-data/
+.env
+.pytest_cache/
+tests/
+*.md
